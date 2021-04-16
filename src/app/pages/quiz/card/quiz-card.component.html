@@ -1,0 +1,10 @@
+<mat-card *ngIf="quiz" appOnHover>
+    <mat-card-header>
+      <mat-card-title>{{quiz.title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <img *ngIf="quiz.img" [src]="quiz.img" alt="borito">
+      <p>{{quiz.description}}</p>
+    </mat-card-content>
+  </mat-card>
+  

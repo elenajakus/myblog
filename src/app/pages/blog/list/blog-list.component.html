@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>{{title}}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <app-container classes="container-1 flex">
+    <app-blog-card class="item" *ngFor="let item of list " [blog]="item" (getBlog)="onGetBlog($event)">
+    </app-blog-card>
+  </app-container>
+  <br>

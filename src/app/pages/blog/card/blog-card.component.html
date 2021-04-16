@@ -1,0 +1,19 @@
+<mat-card *ngIf="blog" (click)="getBlog.emit(blog)" appOnHover>
+  <mat-card-header>
+    <mat-card-title>{{blog.title}}<small *ngIf="blog.lengthMin">({{blog.lengthMin}}p)</small></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <img *ngIf="blog.img" [src]="blog.img" alt="borito">
+    <p>{{blog.description}}</p>
+  </mat-card-content>
+  <mat-card-actions *ngIf="hasAction">
+    <button mat-button (click)="toggleStar($event)">
+      <mat-icon *ngIf="blog.star;else star">star</mat-icon>
+      <ng-template #star>
+        <mat-icon>star_outline</mat-icon>
+      </ng-template>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+
