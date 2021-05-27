@@ -81,36 +81,9 @@
             </mat-form-field>
           </td>
           <td formGroupName="1">
-            <mat-form-field class="max-width">
-              <mat-label>Telefon</mat-label>
-              <input type="phone" formControlName="value" matInput>
-            </mat-form-field>
           </td>
         </tr>
       </table>
     </mat-card-content>
   </mat-card>
-
-  <mat-card class="margin-bottom" formArrayName="address">
-    <mat-card-header>
-      <mat-card-title>Lakcímek</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <button mat-raised-button color="secondary" class="max-width margin-bottom" (click)="addAddress()">
-        <mat-icon>add</mat-icon>
-        Cím
-      </button>
-      <span *ngFor="let item of getAddress.controls; let i = index" class="max-width" style="display: flex;">
-        <mat-form-field [formGroupName]="i" style="flex: 1 1;">
-          <mat-label>Lakcím {{i + 1}}.</mat-label>
-          <input type="text" name="address" formControlName="text" matInput>
-        </mat-form-field>
-        <button mat-icon-button color="warn" (click)="removeAddress(i)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </span>
-    </mat-card-content>
-  </mat-card>
-
-  <button mat-button (click)="log()">log</button>
 </app-container>

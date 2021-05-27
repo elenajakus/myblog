@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlogListComponent } from './blog-list.component';
 import { BlogCardModule } from '../card/blog-card.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [BlogListComponent],
@@ -13,7 +14,8 @@ import { BlogCardModule } from '../card/blog-card.module';
     BlogListRoutingModule,
     MatToolbarModule,
     ContainerModule,
-    BlogCardModule
+    BlogCardModule,
+    MatProgressSpinnerModule
   ]
 })
 export class BlogListModule { }

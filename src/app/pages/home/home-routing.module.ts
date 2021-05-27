@@ -1,6 +1,7 @@
 import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {AuthGuard} from '../../shared/guards/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'splash', pathMatch: 'full' },
@@ -19,12 +20,9 @@ const routes: Routes = [
             {
                 path: 'quizes',
                 loadChildren: () => import('./../quiz/list/quiz-list.module').then(m => m.QuizListModule),
-            },
-           {
-                path: 'favourites',
-                loadChildren: () => import('./../favourite/card/favourite-card.module').then(m => m.FavouriteCardModule),
-           },
-        ]
+            }
+        ],
+      canActivateChild: [AuthGuard] // igy levedem az egeszet
     },
 ];
 

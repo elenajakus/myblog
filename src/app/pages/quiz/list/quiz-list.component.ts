@@ -1,11 +1,11 @@
 import { FbBaseService } from './../../../services/fb-base.service';
 import { Quiz } from './../../../shared/models/quiz.model';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { QuizAddComponent } from '../add/quiz-add.component';
 import {FormControl} from '@angular/forms';
-import {debounceTime, map, startWith} from 'rxjs/operators';
+import {catchError, debounceTime, map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-quiz-list',
@@ -14,17 +14,19 @@ import {debounceTime, map, startWith} from 'rxjs/operators';
 })
 export class QuizListComponent implements OnInit {
   title = 'Quizek';
-  list: Observable<Quiz[]> | null = null;
+  list$: Observable<Quiz[]> | null = null;
 
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<String[]> | null = null; /*filteredOptions: ebbe rakom bele a talalatokat*/
+  filteredOptions$: Observable<string[]> | null = null; /*filteredOptions: ebbe rakom bele a talalatokat*/
+
+  errorObject = null;
 
   constructor(private service: FbBaseService<Quiz>, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.get();
-    this.filteredOptions = this.myControl.valueChanges /*a control barmilyen valtozasara reagalni fog*/
+    this.filteredOptions$ = this.myControl.valueChanges /*a control barmilyen valtozasara reagalni fog*/
       .pipe(
         startWith(''), /*stringet varok el*/
         debounceTime(300),
@@ -33,8 +35,15 @@ export class QuizListComponent implements OnInit {
   }
 
   get(): void {
-    this.list = this.service.get('quizes');
+    this.errorObject = null;
+    this.list$ = this.service.get('quizes').pipe(
+      catchError(err => {
+        this.errorObject = err;
+        return throwError(err);
+      })
+    );
   }
+  // hibakezeles pipeal
 
   openDialog(): void {
     const dialogRef = this.dialog.open(QuizAddComponent, {});
@@ -42,7 +51,7 @@ export class QuizListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((quiz: Quiz) => {
       console.log(quiz);
       if (quiz?.title) {
-        this.service.add('quizes', quiz);
+        this.service.add('quizes', quiz).then(id => { console.log(id); });
       }
     }, (err: any) => {
       console.warn(err);
@@ -50,7 +59,9 @@ export class QuizListComponent implements OnInit {
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().includes(filterValue)); /*lowercase, es az opciokba legyen benne egyertelmuen*/
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    /*lowercase, es az opciokba legyen benne egyertelmuen*/
   }
 
 }
+ // async pipe onmagatol leiratkozik, ha nem hasznaljak(ezert hasznos)

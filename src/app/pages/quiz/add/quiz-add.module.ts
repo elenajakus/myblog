@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
     MatFormFieldModule
   ],
+  entryComponents: [QuizAddComponent],
   exports: [QuizAddComponent]
 })
 export class QuizAddModule { }

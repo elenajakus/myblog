@@ -23,6 +23,6 @@ export const BLOGPAGES: Blog[] = [
         id: '4',
         title: 'Önismeret',
         description: 'érzelmi intelligencia fejlesztése',
-        img: 'https://lh3.googleusercontent.com/proxy/ijmkinkwF7vyIXG1yfc4FkkCy3MuRHDk-SUWlR64-8vuFmhUqXmHsfmdxEaxIM5UW2IwyfR0z14FsnDGXlSIN1s-UMs6hZAZuz6RT13oEYrqigvDrguqF9s9LeR3oqM9pW-UpeUEpvGdViMwMQ'
+        img: 'https://tixa.hu/kepek/0009/9143-1_20190123151448.jpg'
     }
 ];

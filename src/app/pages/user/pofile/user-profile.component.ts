@@ -23,20 +23,6 @@ export class UserProfileComponent implements OnInit {
     (idFormArray.get([1]) as FormGroup).controls.value.setValue('valaki@gmail.com');
   }
 
-  get getAddress(): FormArray {
-    return this.form?.get('address') as FormArray;
-  }
-
-  addAddress(): void {
-    const idFormArray = this.form?.get('address') as FormArray;
-    idFormArray.push(getAddressForm());
-  }
-
-  removeAddress(index: number): void {
-    const formArray = this.form?.get('address') as FormArray;
-    formArray.removeAt(index);
-  }
-
   log(): void {
     console.log(this.form?.value);
   }

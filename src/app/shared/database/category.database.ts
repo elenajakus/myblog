@@ -14,12 +14,5 @@ export const CATEGORIES: Category[] = [
         value: 'Quiz',
         color: 'cyan',
         url: '/home/quizes'
-    },
-    {
-        title: 'kedvencek',
-        icon: 'star',
-        value: 'favorite',
-        color: '#c2185b',
-        url: '/home/favourites'
     }
 ];

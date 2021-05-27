@@ -27,8 +27,8 @@ export class DetailsComponent implements OnInit {
     console.log(this.id, this.dataNameStr);
   }
 
-  getItem(): void {
-    this.inData = this.service.getById(this.dataNameStr + 's', this.id);
+   getItem(): void {
+      this.inData = this.service.getById(this.dataNameStr + 's', this.id);
   }
 
   close(): void {
