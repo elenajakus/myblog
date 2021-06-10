@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -22,7 +23,11 @@ import {MatChipsModule} from '@angular/material/chips';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatChipsModule
-  ]
+    MatChipsModule,
+    MatDialogModule,
+    MatFormFieldModule
+  ],
+  entryComponents: [RegistrationComponent],
+  exports: [RegistrationComponent]
 })
 export class RegistrationModule { }
