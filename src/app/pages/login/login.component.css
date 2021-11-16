@@ -1,0 +1,26 @@
+.alert {
+  text-align: center;
+  margin: 16px -16px;
+  color: rgb(185, 53, 36);
+  background-color: rgb(245, 219, 215);
+  border: 1px solid rgb(245, 176, 182);
+  border-radius: 0;
+  height: 50px;
+  line-height: 50px;
+  box-shadow: none;
+}
+
+h3 {
+  text-align: center;
+  font-size: 30pt;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.form-group .p-2,
+.form-group,
+.register {
+  text-align: center;
+  padding: 10px;
+}
+

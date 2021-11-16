@@ -6,7 +6,7 @@ const routes: Routes = [
     {
         path: '',
         component: LoginComponent,
-        data: { title: 'Bejelentkezés - My_favourite.e' }
+        data: { title: 'Bejelentkezés - My_favourite.E' }
     }
 ];
 

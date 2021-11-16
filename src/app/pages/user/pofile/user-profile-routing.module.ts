@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     component: UserProfileComponent,
-    data: { title: 'Profil - My_favourites.e' }
+    data: { title: 'Profil - My_favourites.E' }
   }
 ];
 

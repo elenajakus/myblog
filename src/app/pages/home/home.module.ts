@@ -10,7 +10,7 @@ import { HomeRoutingModule } from './home-routing.module';
   imports: [
     HomeRoutingModule,
     CommonModule,
-    NavModule
+    NavModule,
   ],
   exports: [HomeComponent]
 })

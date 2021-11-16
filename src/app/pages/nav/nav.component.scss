@@ -18,7 +18,48 @@ a[mat-button] {
 mat-toolbar {
   position: sticky;
   position: -webkit-sticky;
-  top: 0;/* a felso resz fix */
+  top: 0; /* a felso resz fix */
   z-index: 1000;
 }
-  /* mat-button directiva szelektorja, splash-title a style */
+
+/* mat-button directiva szelektorja, splash-title a style */
+
+.footer {
+  background: #242526;
+  color: #fff;
+  border-top: 7px solid #3b3c3d;
+  clear: both;
+  position: fixed;
+  height: 50px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
+  padding-left: 10px;
+  dispay: block;
+
+  &-inner {
+    display: flex;
+  }
+
+  &-label {
+    line-height: 40px;
+    margin-right: auto;
+  }
+
+  &-right {
+    padding-left: 450px;
+    padding-top: 10px;
+
+  }
+}
+
+.container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative;
+  display: flex;
+}

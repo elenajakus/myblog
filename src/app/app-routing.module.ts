@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import {AuthGuard} from './shared/guards/auth.guard';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }, /* atiranyitasra szolgal, pathmatch full-teljesen meg kell egyezzen a routing */
@@ -9,8 +9,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
   },
   {
-    path: 'registration',
-    loadChildren: () => import('./pages/registration/registration.module').then(m => m.RegistrationModule),
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule),
   },
   {
     path: 'login',
@@ -19,12 +19,17 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./pages/user/pofile/user-profile.module').then(m => m.UserProfileModule),
-    canActivate: [AuthGuard]
+    canActivate: []
   },
   {
-    path: 'details',
-    loadChildren: () => import('./pages/details/details.module').then(m => m.DetailsModule),
-    canActivate: [AuthGuard]
+    path: 'blogpages',
+    loadChildren: () => import('./pages/blogpages/blogpages.module').then(m => m.BlogpagesModule),
+    canActivate: []
+  },
+  {
+    path: 'quizpages',
+    loadChildren: () => import('./pages/quizpages/quizpages.module').then(m => m.QuizpagesModule),
+    canActivate: []
   },
   {
     path: '**',

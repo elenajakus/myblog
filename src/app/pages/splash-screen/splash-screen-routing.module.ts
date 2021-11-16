@@ -6,7 +6,7 @@ const routes: Routes = [
     {
         path: '',
         component: SplashScreenComponent,
-        data: { title: 'Főoldal - My_favoires.e' }
+        data: { title: 'Főoldal - My_favourites.E' }
     }
 ];
 

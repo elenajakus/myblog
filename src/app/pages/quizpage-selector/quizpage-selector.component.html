@@ -1,0 +1,9 @@
+<app-container>
+  <h1>Quizek</h1>
+  <div class="quiz-category">
+    <mat-card *ngFor="let item of quizpages" matRipple [matRippleColor]="item.color" appOnHover
+              [routerLink]="[ item.url ]">
+      {{item.title}}
+    </mat-card>
+  </div>
+</app-container>

@@ -1,0 +1,24 @@
+h1 {
+  text-align: center;
+}
+
+.blog-category {
+  display: flex;
+  /* kozepre rendezze az elemeket display flex */
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.blog-category mat-card {
+  flex: 1;
+  min-width: 200px;
+  min-height: 200px;
+  margin: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+}

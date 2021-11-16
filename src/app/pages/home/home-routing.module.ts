@@ -1,7 +1,7 @@
 import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {AuthGuard} from '../../shared/guards/auth.guard';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'splash', pathMatch: 'full' },
@@ -11,18 +11,25 @@ const routes: Routes = [
         children: [
             {
                 path: 'splash',
-                loadChildren: () => import('./../splash-screen/splash-screen.module').then(m => m.SplashScreenModule),
+                loadChildren: () => import('./../splash-screen/splash-screen.module').
+                then(m => m.SplashScreenModule),
              },
             {
-                path: 'blogpages',
-                loadChildren: () => import('./../blog/list/blog-list.module').then(m => m.BlogListModule),
+                path: 'magamrol',
+                loadChildren: () => import('./../magamrol/magamrol.module').
+                then(m => m.MagamrolModule),
             },
             {
-                path: 'quizes',
-                loadChildren: () => import('./../quiz/list/quiz-list.module').then(m => m.QuizListModule),
+                path: 'quizpages',
+                loadChildren: () => import('./../quizpages/quizpages.module').
+                then(m => m.QuizpagesModule),
+            },
+            {
+                path: 'blogpages',
+                loadChildren: () => import('./../blogpages/blogpages.module').
+                then(m => m.BlogpagesModule),
             }
         ],
-      canActivateChild: [AuthGuard] // igy levedem az egeszet
     },
 ];
 

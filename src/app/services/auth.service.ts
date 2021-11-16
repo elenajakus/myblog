@@ -1,59 +1,84 @@
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Router} from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth) { }
 
-  async logout(): Promise<void> {
-    await this.afAuth.signOut();
+  authState: any = null;
+  private afAuth: any;
+
+  constructor(private afu: AngularFireAuth, private router: Router) {
+    this.afu.authState.subscribe((auth =>{
+      this.authState = auth;
+    }))
   }
 
-  login(email: string, password: string): Promise<any> {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+  // all firebase getdata functions
+
+  get isUserAnonymousLoggedIn(): boolean {
+    return (this.authState !== null) ? this.authState.isAnonymous : false
   }
 
-  authenticated(): boolean {
-    return this.afAuth.authState !== null;
+  get currentUserId(): string {
+    return (this.authState !== null) ? this.authState.uid : ''
+  }
+
+  get currentUserEmail(): string {
+    return this.authState['email']
+  }
+
+  get currentUser(): any {
+    return (this.authState !== null) ? this.authState : null;
+  }
+
+  get isUserEmailLoggedIn(): boolean {
+    if ((this.authState !== null) && (!this.isUserAnonymousLoggedIn)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  getAuth(){
+    return this.afAuth.authState.pipe(map(auth => auth))
+  }
+
+  registerWithEmail(email: string, password: string) {
+    return this.afu.createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.authState = user
+      })
+      .catch(error => {
+        console.log(error)
+        throw error
+      });
+  }
+
+
+
+  loginWithEmail(email: string, password: string)
+  {
+    return this.afu.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.authState = user
+      })
+      .catch(error => {
+        console.log(error)
+        throw error
+      });
+  }
+
+  signout(): void
+  {
+    this.afu.signOut();
+    this.router.navigate(['/login']);
   }
 
   currentUserObservable(): any {
     return this.afAuth.authState;
   }
-
-  /* newPassword(newPassword: string) {
-  return this.afAuth.currentUser.then((user) => {
-    return user.updatePassword(newPassword);
-  });
-} */
-
-  /*  newEmail(newEmail: string) {
-     return this.afAuth.currentUser.then((user) => {
-       return user.updateEmail(newEmail);
-     });
-   } */
-
-  /* updateCurrentUserName(name: string) {
-    return this.afAuth.currentUser.then((user) => {
-      return user.updateProfile({
-        displayName: name
-      });
-    });
-  } */
-
-  /* passwordRemind(email: string): Promise<void> {
-    return this.afAuth.sendPasswordResetEmail(email);
-  } */
-
-  /*  createUser(email: string, password: string, name?: string) {
-     return this.afAuth.createUserWithEmailAndPassword(email, password).then((result) => {
-       if (name) {
-         this.updateCurrentUserName(name);
-       }
-       return result.user;
-     });
-   } */
-
 }

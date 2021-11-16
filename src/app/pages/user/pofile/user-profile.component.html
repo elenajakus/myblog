@@ -7,83 +7,21 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<app-container *ngIf="form" [formGroup]="form">
+<div class="container" *ngIf="form" [formGroup]="form">
 
+  <img src="/assets/images/user.png" alt="user" width="200" height="200">
   <mat-card class="margin-bottom">
     <mat-card-header>
-      <mat-card-title>Biztonság és magánélet</mat-card-title>
+      <mat-card-title>Információk</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-list>
         <mat-list-item>
           <mat-icon mat-list-icon>lock</mat-icon>
           <div mat-line> E-mail </div>
-          <div mat-line> {{form.value.identifier[1].value}} </div>
+          <div mat-line> {{this.form.value}} </div>
         </mat-list-item>
       </mat-list>
     </mat-card-content>
   </mat-card>
-
-  <mat-card class="margin-bottom">
-    <mat-card-header>
-      <mat-card-title>Általános információk</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <table class="max-width margin-bottom" cellspacing="0" formArrayName="name">
-        <tr>
-          <td formGroupName="0">
-            <mat-form-field class="max-width">
-              <mat-label>Név</mat-label>
-              <input type="text" name="name" matInput formControlName="text">
-            </mat-form-field>
-          </td>
-          <td formGroupName="1">
-            <mat-form-field class="max-width">
-              <mat-label>Leánykori név</mat-label>
-              <input type="text" formControlName="text" name="name" matInput>
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
-      <table class="max-width margin-bottom" cellspacing="0">
-        <tr style="display: flex; align-items: center;">
-          <td style="flex: 1;">
-            <mat-form-field appearance="fill" class="max-width">
-              <mat-label>Születésnap</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="birthDate" autocomplete="new-password">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </td>
-          <td style="flex: 1; padding-left: 8px;">
-            <mat-radio-group formControlName="gender" class="max-width">
-              <mat-radio-button value="Egyéb">Egyéb</mat-radio-button>
-              <mat-radio-button value="Férfi">Férfi</mat-radio-button>
-              <mat-radio-button value="Nő">Nő</mat-radio-button>
-            </mat-radio-group>
-          </td>
-        </tr>
-      </table>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card class="margin-bottom">
-    <mat-card-header>
-      <mat-card-title>Kapcsolattartási információk</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <table class="max-width" cellspacing="0" formArrayName="telecom">
-        <tr>
-          <td formGroupName="0">
-            <mat-form-field class="max-width">
-              <mat-label>E-mail</mat-label>
-              <input type="email" name="email" matInput formControlName="value">
-            </mat-form-field>
-          </td>
-          <td formGroupName="1">
-          </td>
-        </tr>
-      </table>
-    </mat-card-content>
-  </mat-card>
-</app-container>
+</div>

@@ -2,6 +2,13 @@ import { Category } from '../models/category.model';
 
 export const CATEGORIES: Category[] = [
     {
+        title: 'rólam',
+        icon: 'person',
+        value: 'blog',
+        color: 'teal',
+        url: '/home/magamrol'
+    },
+    {
         title: 'blogposztok',
         icon: 'list',
         value: 'blog',
@@ -9,10 +16,10 @@ export const CATEGORIES: Category[] = [
         url: '/home/blogpages'
     },
     {
-        title: 'Quizek',
+        title: 'quizek',
         icon: 'quizes',
-        value: 'Quiz',
+        value: 'quiz',
         color: 'cyan',
-        url: '/home/quizes'
-    }
+        url: '/home/quizpages'
+    },
 ];

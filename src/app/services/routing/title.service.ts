@@ -27,7 +27,7 @@ export class TitleService implements OnDestroy {
   }
 
   getTitle(state: RouterState | any, parent: ActivatedRoute): any[] {
-    const data = [];
+    const data: string[] = [];
     if (parent && parent.snapshot.data && parent.snapshot.data.title) {
       data.push(parent.snapshot.data.title);
     }
