@@ -1,3 +1,5 @@
+import { PostsModule } from './../posts/posts.module';
+
 import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,15 +22,23 @@ const routes: Routes = [
                 then(m => m.MagamrolModule),
             },
             {
-                path: 'quizpages',
-                loadChildren: () => import('./../quizpages/quizpages.module').
-                then(m => m.QuizpagesModule),
+                path: 'quizpage-selector',
+                loadChildren: () => import('../quizpage-selector/quizpage-selector.module').
+                then(m => m.QuizpageSelectorModule),
+                canActivate: [AuthGuard]
             },
             {
-                path: 'blogpages',
-                loadChildren: () => import('./../blogpages/blogpages.module').
-                then(m => m.BlogpagesModule),
-            }
+                path: 'blogpage-selector',
+                loadChildren: () => import('../blogpage-selector/blogpage-selector.module').
+                then(m => m.BlogpageSelectorModule),
+            },
+            {
+                path: 'posts',
+                loadChildren: () => import('../posts/posts.module').
+                then(m => m.PostsModule),
+                canActivate: [AuthGuard]
+            },
+          
         ],
     },
 ];

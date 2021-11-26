@@ -37,6 +37,7 @@ mat-toolbar {
   margin-bottom: 0px;
   padding-left: 10px;
   dispay: block;
+  z-index: 2000;
 
   &-inner {
     display: flex;

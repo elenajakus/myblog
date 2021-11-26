@@ -13,13 +13,21 @@ export const CATEGORIES: Category[] = [
         icon: 'list',
         value: 'blog',
         color: 'teal',
-        url: '/home/blogpages'
+        url: '/home/blogpage-selector'
     },
     {
         title: 'quizek',
         icon: 'quizes',
         value: 'quiz',
         color: 'cyan',
-        url: '/home/quizpages'
+        url: '/home/quizpage-selector'
     },
+    {
+        title: 'Posztjaitok',
+        icon: 'star',
+        value: 'quiz',
+        color: 'cyan',
+        url: '/home/posts'
+    },
+   
 ];

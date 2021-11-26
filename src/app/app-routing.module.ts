@@ -19,18 +19,10 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./pages/user/pofile/user-profile.module').then(m => m.UserProfileModule),
-    canActivate: []
+    canActivate: [AuthGuard]
   },
-  {
-    path: 'blogpages',
-    loadChildren: () => import('./pages/blogpages/blogpages.module').then(m => m.BlogpagesModule),
-    canActivate: []
-  },
-  {
-    path: 'quizpages',
-    loadChildren: () => import('./pages/quizpages/quizpages.module').then(m => m.QuizpagesModule),
-    canActivate: []
-  },
+ 
+ 
   {
     path: '**',
     redirectTo: 'home',

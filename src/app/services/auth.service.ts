@@ -1,84 +1,55 @@
 import { Injectable } from '@angular/core';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {Router} from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { User } from '../shared/models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  authState: any = null;
-  private afAuth: any;
 
-  constructor(private afu: AngularFireAuth, private router: Router) {
-    this.afu.authState.subscribe((auth =>{
-      this.authState = auth;
-    }))
+  authState: any = null
+
+  userCollection: AngularFirestoreCollection<User>;
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
+    this.userCollection = this.afs.collection('users');
+    this.afAuth.authState.subscribe(data => this.authState = data)
   }
 
-  // all firebase getdata functions
-
-  get isUserAnonymousLoggedIn(): boolean {
-    return (this.authState !== null) ? this.authState.isAnonymous : false
+  get authenticated(): boolean {
+    return this.authState !== null
   }
 
   get currentUserId(): string {
-    return (this.authState !== null) ? this.authState.uid : ''
-  }
-
-  get currentUserEmail(): string {
-    return this.authState['email']
-  }
-
-  get currentUser(): any {
-    return (this.authState !== null) ? this.authState : null;
-  }
-
-  get isUserEmailLoggedIn(): boolean {
-    if ((this.authState !== null) && (!this.isUserAnonymousLoggedIn)) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  getAuth(){
-    return this.afAuth.authState.pipe(map(auth => auth))
-  }
-
-  registerWithEmail(email: string, password: string) {
-    return this.afu.createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.authState = user
-      })
-      .catch(error => {
-        console.log(error)
-        throw error
-      });
+    return this.authenticated ? this.authState.uid : null
   }
 
 
-
-  loginWithEmail(email: string, password: string)
-  {
-    return this.afu.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.authState = user
-      })
-      .catch(error => {
-        console.log(error)
-        throw error
-      });
+  async logout(): Promise<void> {
+    await this.afAuth.signOut();
   }
 
-  signout(): void
-  {
-    this.afu.signOut();
-    this.router.navigate(['/login']);
+  login(email: string, password: string): Promise<any> {
+    return this.afAuth.signInWithEmailAndPassword(email, password);
   }
+
 
   currentUserObservable(): any {
     return this.afAuth.authState;
   }
+
+  getAuth() {
+    return this.afAuth.authState.pipe(map(auth => auth))
+  }
+  createNewUser(email: string, password: string): Promise<any> {
+    return this.afAuth.createUserWithEmailAndPassword(email, password);
+  }
+  newUser(user: User): Promise<void> {
+    const userDoc = this.userCollection.doc(`${user.id}`);
+    return userDoc.set(user);
+  }
+
 }

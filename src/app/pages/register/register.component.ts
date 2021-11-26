@@ -1,64 +1,81 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { User } from 'src/app/shared/models/user.model';
+import { PasswordValidationService } from 'src/app/services/password-validation.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  email = "";
-  password = "";
-  message = '';
-  errorMessage = ''; // validation error handle
-  error: { name: string, message: string } = {name: '', message: ''}; // for firbase error handle
+  isValidForm = false;
 
-  constructor(private authservice: AuthService, private router: Router) {
+
+  constructor(
+   
+    private formBuilder: FormBuilder,
+    private as: AuthService,
+    private pvs: PasswordValidationService,
+    private router: Router
+  ) {
+
   }
 
-  ngOnInit(): void {
+  registerForm = this.formBuilder.group(
+    { userName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+    },
+    {
+      validator: this.pvs.passwordMatchValidator('password', 'confirmPassword'),
+    }
+  );
+  get userName(): AbstractControl | null {
+    return this.registerForm.get('userName');
   }
 
-  clearErrorMessage() {
-    this.errorMessage = '';
-    this.error = {name: '', message: ''};
+  get email(): AbstractControl | null {
+    return this.registerForm.get('email');
   }
 
-  register() {
-    this.clearErrorMessage();
-    if (this.validateForm(this.email, this.password)) {
-      this.authservice.registerWithEmail(this.email, this.password)
-        .then(() => {
-          this.message = "Ön sikeresen regisztrált!"
-          //this.router.navigate(['/userinfo'])
-        }).catch(_error => {
-        this.error = _error
-        this.router.navigate(['/register'])
-      })
+  get password(): AbstractControl | null {
+    return this.registerForm.get('password');
+  }
+
+  get confirmPassword(): AbstractControl | null {
+    return this.registerForm.get('confirmPassword');
+  }
+
+  ngOnInit(): void {}
+
+
+
+ 
+
+  async onSubmit(): Promise<void> {
+    if (this.registerForm.valid) {
+      this.isValidForm = true;
+      const email = this.registerForm.get('email')?.value;
+      const password = this.registerForm.get('password')?.value;
+      try {
+        const authResult = await this.as.createNewUser(email, password);
+        const user: User = {
+          id: authResult.user?.uid,
+          userName: this.registerForm.get('userName')?.value,
+          email: this.registerForm.get('email')?.value,
+          
+        };
+        await this.as.newUser(user);
+        this.router.navigateByUrl('/login');
+      } catch (error) {
+        this.isValidForm = false;
+
+      }
     }
   }
-
-  validateForm(email: string, password: string) {
-    if (email.length === 0) {
-      this.errorMessage = "Adja meg az email címét.";
-      return false;
-    }
-
-    if (password.length === 0) {
-      this.errorMessage = "Adja meg a jelszavát.";
-      return false;
-    }
-
-    if (password.length < 6) {
-      this.errorMessage = "A jelszó nem lehet kevesebb 6 karakternél!";
-      return false;
-    }
-
-    this.errorMessage = '';
-    return true;
-
-  }
-
 }

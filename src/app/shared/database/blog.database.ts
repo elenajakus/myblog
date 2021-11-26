@@ -4,21 +4,21 @@ export const BLOGPAGES: Blog[] = [
    {
            title: 'Fenntarthatóság',
            color: 'teal',
-           url: '/blogpages/fenntart'
+           url: '/home/blogpage-selector/fenntart'
        },
        {
            title: 'Önismeret',
            color: 'teal',
-           url: '/blogpages/onismeret'
+           url: '/home/blogpage-selector/onismeret'
        },
        {
            title: 'Könyvek',
            color: 'teal',
-           url: '/blogpages/konyvek'
+           url: '/home/blogpage-selector/konyvek'
        },
        {
            title: 'Pénzügy',
            color: 'teal',
-           url: '/blogpages/penzugy'
+           url: '/home/blogpage-selector/penzugy'
        },
 ];

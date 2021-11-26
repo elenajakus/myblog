@@ -1,3 +1,4 @@
+import { NavModule } from './../nav/nav.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register.component';
@@ -9,7 +10,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import { NavModule } from '../nav/nav.module';
+
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -26,6 +27,7 @@ import { NavModule } from '../nav/nav.module';
     MatDialogModule,
     MatFormFieldModule,
     NavModule
+
   ],
   entryComponents: [RegisterComponent],
   exports: [RegisterComponent]

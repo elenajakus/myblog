@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {getPersonForm} from '../../../shared/forms/person.forms';
 import {getAddressForm} from '../../../shared/forms/address.form';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,11 +10,18 @@ import {getAddressForm} from '../../../shared/forms/address.form';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  user: any ={}
+
   form: FormGroup | null = null;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.getAuth().subscribe((user) =>
+    {
+      this.user =user
+    })
+
       this.initForm();
   }
 
