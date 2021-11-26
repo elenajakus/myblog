@@ -1,0 +1,54 @@
+
+<div class="container">
+  <button mat-icon-button [routerLink]="[ '/home/quizpage-selector' ]">
+    <!-- a routerlinket rarakjuk a rootra -->
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <div class="row quiz-row" *ngIf="complete">
+    <div class="col-xs-12">
+      <div class="col-xs-12">
+        <div>
+          <h4 class="result">Quiz Eredmény: {{score}}/{{questions.length}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row quiz-row" *ngIf="begin">
+    <div class="col-xs-12">
+      <div class="col-xs-12">
+        <h4>{{currentQuestion.question}}</h4>
+        <div class="option" *ngFor="let option of currentQuestion.option">
+          <input class="quiz-radio" type="radio" name="{{currentQuestion.id}}"
+                 value="{{option.optionid}}" [(ngModel)]="currentQuestion.selected"/>{{option.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row quiz-row" *ngIf="!begin">
+    <div class="col-xs-12">
+      <div class="col-xs-12">
+        <input class="btn-start" type="button"
+               value="{{buttonName}}" (click)="start()"/>
+        <div class="center">
+          <img src="/assets/images/spells.jpg" alt="harry-potter" width="570" height="350">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row quiz-row" *ngIf="begin">
+    <div class="col-xs-12">
+      <div class="col-xs-12">
+        <input class="btn-primary" type="button"
+               *ngIf="(currentIndex + 1) != questions.length" value="Következő kérdés" (click)="next()"/>
+      </div>
+    </div>
+  </div>
+  <div class="row quiz-row" *ngIf="begin && currentIndex == questions.length - 1">
+    <div class="col-xs-12">
+      <div class="col-xs-12">
+        <input class="btn-success" type="button" value="Beküldés" (click)="submit()"/>
+      </div>
+    </div>
+  </div>
+</div>
